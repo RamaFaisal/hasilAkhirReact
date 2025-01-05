@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 const AdminLayout = () => {
   return (
     <>
-      <div className="flex h-auto bg-gray-100">
+      <div className="flex h-screen bg-gray-100">
         <aside className="w-64 bg-indigo-600 p-4">
           <h1 className="font-bold text-white text-2xl">Admin Panel</h1>
           <nav>
