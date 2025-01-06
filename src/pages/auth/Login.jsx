@@ -18,23 +18,38 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      Swal.fire({
+        icon: "error",
+        title: "Validation Error",
+        text: "Email and password cannot be empty!",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://demo-api.syaifur.io/api/login",
         formData
       );
-      const { token } = response.data;
+
+      console.log(response.data);
+      const token = response.data.data.token;
+      console.log("Token yang didapatkan:", token);
 
       // Simpan token ke localStorage
       localStorage.setItem("token", token);
+
       Swal.fire({
         icon: "success",
         title: "Login Successful",
         text: "Welcome to the admin dashboard!",
       });
-      navigate("/admin/"); // Redirect ke halaman dashboard
+
+      // Redirect ke halaman admin
+      navigate("/admin/");
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.error("Error logging in:", error.toJSON());
       Swal.fire({
         icon: "error",
         title: "Login Failed",
